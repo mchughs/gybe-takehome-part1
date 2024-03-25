@@ -1,0 +1,11 @@
+{:deps true
+ :nrepl {:port 8777}
+ :builds
+ {:app
+  {:target :browser
+   :output-dir "docs/js/compiled"
+   :asset-path "js/compiled"
+   :modules {:app {:init-fn core/init}}
+   :devtools {:preloads [devtools.preload]
+              :http-root "docs"
+              :http-port 5444}}}}

@@ -1,0 +1,12 @@
+{
+  "name": "timezone-website",
+  "version": "1.0.0",
+  "description": "Using a Clojure dialect, make a very simple timezone converter website and deploy it using GitHub pages or similar.",
+  "main": "index.js",
+  "author": "Samuel McHugh",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
