@@ -13,20 +13,25 @@
 
 (defn component []
   (r/with-let [time (r/atom (-> (dayjs) (.set "hour" 12) (.set "minute" 34)))
-               ;; Grab the user's timezone as a default
+               ;; Grab the user's real timezone as a default
                input-zone (r/atom (.-timeZone (.resolvedOptions (js/Intl.DateTimeFormat))))
                output-zone (r/atom "Etc/GMT")]
     [:div#root
      [:h1 "Timezone Converter"]
-     [time-picker/component time]
-     [timezone-picker/component input-zone]
-     [timezone-picker/component output-zone]
-     [:div (str "The time in " @output-zone " is..." 
-                ;; See https://day.js.org/docs/en/timezone/converting-to-zone
-                (-> @time
-                    (.tz @input-zone true)
-                    (.tz @output-zone)
-                    (.format "LT")))]]))
+     [:div.container
+      [:div.column1
+       [time-picker/component time]
+       [:div "Your timezone"
+        [timezone-picker/component input-zone]]
+       [:div "Target timezone"
+        [timezone-picker/component output-zone]]]      
+      [:div.column2
+       (str "The equivalent time in " @output-zone " is...")
+       [:strong ;; See https://day.js.org/docs/en/timezone/converting-to-zone
+        (-> @time
+            (.tz @input-zone true)
+            (.tz @output-zone)
+            (.format "LT"))]]]]))
 
 (defn mount! []
   (js/console.log "Mounting...")
